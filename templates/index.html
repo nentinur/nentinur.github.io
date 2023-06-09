@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Link CSS Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <!-- Scripst javascript -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>GamAu (Gambar & Audio Processing)</title>
+  </head>
+
+  <body>
+    <div class="container mt-3">
+      <div class="card border-black">
+        <!-- Navbar -->
+        <div
+          class="card-header"
+          style="background-color: rgba(147, 194, 249, 0.653)"
+        >
+          <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#"
+                >GamAu (Gambar & Audio Processing)</a
+              >
+            </div>
+          </nav>
+        </div>
+        <div class="card-body">
+          <div class="m-2 text-center">
+            <h1>Selamat Datang Di GamAu</h1>
+            <p>Ayo mulai proses gambar dan audiomu di GamAu!</p>
+          </div>
+          <div class="row mt-5">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card-body">
+                  <h2 class="card-title">Resize Gambar</h2>
+                    <div class="my-3">
+                      <form action="/gambar" enctype="multipart/form-data" method="POST">
+                        <div class="mb-3">
+                          <label for="image" class="form-label">Upload Gambar</label>
+                          <input name="image" class="form-control" type="file" id="image">
+                        </div>
+                         <div class="mb-3">
+                          <label for="width" class="form-label">
+                            Lebar
+                          </label>
+                          <input
+                            type="text"
+                            name="width"
+                            class="form-control"
+                            id="width"
+                          />
+                        </div>
+                        <div class="my-3">
+                          <button type="submit" class="btn btn-primary">Proses Gambar</button>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="my-3">
+                      {% if resized_image %}
+                      <h5 class="card-title">Hasil</h5>
+                      <img src="data:image/jpeg;base64,{{ resized_image }}" alt="Resized Image">
+                      <a class="btn btn-primary" href="static/resized_image.jpg" download="static/resized_image.jpg">Download</a>
+                      {% endif %}
+                    </div>
+              </div>
+          </div>
+          <div class="col-sm-6">
+              <div class="card-body">
+                <h2 class="card-title">Kompresi Audio</h2>
+                  <div class="my-3">
+                    <form action="/audio" enctype="multipart/form-data" method="POST">
+                      <div class="mb-3">
+                        <label for="audio" class="form-label">Upload Audio</label>
+                        <input name="audio" class="form-control" type="file" id="audio">
+                      </div>
+                      <div class="my-3">
+                        <button type="submit" class="btn btn-success">Proses Audio</button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="my-3">
+                    {% if compressed_audio %}
+                    <h5 class="card-title">Hasil</h5>
+                    <audio controls src="{{ url_for('static', filename='compressed_audio.mp3') }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p>Ukuran sebelum dikompresi: {{ original_size }} MB</p>
+                    <p>ukuran setelah dikompresi: {{ compressed_size }} MB</p>
+                    <a class="btn btn-success" href="static/compressed_audio.mp3" download="static/compressed_audio.mp3">Download</a>
+                  </div>
+                  {% endif %}
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <!-- Script Javascript -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+      integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+      integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
