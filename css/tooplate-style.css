@@ -469,8 +469,7 @@ strong {
 
 .social-links .uil {
   color: #f7f3f3;
-  font-size: 20px;
-  display: block;
+  font-size: 30px;
   margin: 5px 0;
 }
 .social-links .uil:hover {
@@ -571,12 +570,7 @@ strong {
     display: block;
   }
 
-  .contact-info {
-    flex-direction: column;
-  }
-
   .social-links li {
     display: inline-block;
-    vertical-align: top;
   }
 }
